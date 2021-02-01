@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import Styles from './login-styles.scss'
 import { Header, Footer, Input, FormStatus } from '@/presentation/components'
 import Context from '@/presentation/contexts/form/form-context'
@@ -50,7 +51,7 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
           <Input type="email" name="email" placeholder="digite seu e-mail"/>
           <Input type="password" name="password" placeholder="digite seu senha"/>
           <button data-testid="submit" className={Styles.submit} type="submit" disabled={!!state.emailError || !!state.passwordError}>Entrar</button>
-          <span className={Styles.link}>Criar Conta</span>
+          <Link data-testid="signup" to='/signup' className={Styles.link}>Criar Conta</Link>
           <FormStatus />
         </form>
       </Context.Provider>
