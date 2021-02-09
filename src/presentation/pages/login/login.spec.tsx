@@ -52,11 +52,6 @@ const testElementText = (sut: RenderResult, fieldName: string, text: string): vo
   expect(element.textContent).toBe(text)
 }
 
-const testElementsExists = (sut: RenderResult, fieldName: string): void => {
-  const element = sut.getByTestId(fieldName)
-  expect(element).toBeTruthy()
-}
-
 describe('Login Component', () => {
   afterEach(cleanup)
 
@@ -99,7 +94,7 @@ describe('Login Component', () => {
   test('Should show spinner on submit', async () => {
     const { sut } = makeSut()
     await simulateValidSubmit(sut)
-    testElementsExists(sut, 'spinner')
+    Helper.testElementsExists(sut, 'spinner')
   })
   test('Should call Authentication with correct values', async () => {
     const { sut, authenticationSpy } = makeSut()
