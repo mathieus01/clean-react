@@ -80,7 +80,7 @@ describe('Login Component', () => {
     Helper.populateField(sut, 'password')
     Helper.testStatusForField(sut, 'password', validationErro)
   })
-  test('Should show email error if Validation fails', () => {
+  test('Should show valid email state if Validation succeeds', () => {
     const { sut } = makeSut()
     Helper.populateField(sut, 'email')
     Helper.testStatusForField(sut, 'email')
