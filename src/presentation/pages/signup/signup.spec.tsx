@@ -25,11 +25,6 @@ const makeSut = (params?: SutParams): SutTypes => {
   }
 }
 
-const populateField = (sut: RenderResult, fieldName: string, value = faker.random.word()): void => {
-  const input = sut.getByTestId(fieldName)
-  fireEvent.input(input, { target: { value } })
-}
-
 describe('SignUp Component ', () => {
   afterEach(cleanup)
 
@@ -47,7 +42,7 @@ describe('SignUp Component ', () => {
   test('Should show name error if Validation fails', () => {
     const validationErro = faker.random.words()
     const { sut } = makeSut({ validationErro })
-    populateField(sut, 'name')
+    Helper.populateField(sut, 'name')
     Helper.testStatusForField(sut, 'name', validationErro)
   })
 })
