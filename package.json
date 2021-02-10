@@ -8,12 +8,14 @@
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "npm test -- --watch",
     "test:staged": "npm test -- --findRelatedTests",
-    "test:ci": "npm test -- --coverage"
+    "test:ci": "npm test -- --coverage",
+    "test:cypress": "cypress open"
   },
   "keywords": [],
   "author": "Matheus Nunes Barros",
   "license": "ISC",
   "devDependencies": {
+    "@cypress/webpack-preprocessor": "^5.5.0",
     "@testing-library/react": "^11.2.2",
     "@types/axios": "^0.14.0",
     "@types/faker": "^5.1.4",
@@ -25,8 +27,10 @@
     "@typescript-eslint/eslint-plugin": "^4.7.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.1",
+    "cypress": "^6.4.0",
     "eslint": "^7.13.0",
     "eslint-config-standard-with-typescript": "^11.0.1",
+    "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
