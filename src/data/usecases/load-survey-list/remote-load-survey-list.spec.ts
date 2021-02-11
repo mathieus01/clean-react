@@ -21,7 +21,7 @@ const makeSut = (url = faker.internet.url()): SutTypes => {
 }
 
 describe('RemoteLoadSurveyList', () => {
-  test('Should call HTTPGetClient with correct values', async () => {
+  test('Should call HttpGetClient with correct values', async () => {
     const url = faker.internet.url()
     const { sut, httpGetClientSpy } = makeSut(url)
     await sut.loadAll()
@@ -51,7 +51,7 @@ describe('RemoteLoadSurveyList', () => {
     const promise = sut.loadAll()
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
-  test('Should return a List of SurveyModels of HttpGetClient returns 200 ', async () => {
+  test('Should return a list of SurveyModels of HttpGetClient returns 200 ', async () => {
     const { sut, httpGetClientSpy } = makeSut()
     const httpResult = mockSurveyListModel()
     httpGetClientSpy.response = {
@@ -60,5 +60,13 @@ describe('RemoteLoadSurveyList', () => {
     }
     const surveyList = await sut.loadAll()
     await expect(surveyList).toEqual(httpResult)
+  })
+  test('Should return a empty list if HttpGetClient returns 204 ', async () => {
+    const { sut, httpGetClientSpy } = makeSut()
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.noContent
+    }
+    const surveyList = await sut.loadAll()
+    await expect(surveyList).toEqual([])
   })
 })
