@@ -21,4 +21,16 @@ describe('SurveyItem Component', () => {
     expect(screen.getByTestId('month')).toHaveTextContent('fev')
     expect(screen.getByTestId('year')).toHaveTextContent('2021')
   })
+  test('Should render with correct values', () => {
+    const survey = Object.assign(mockSurveyModel(), {
+      didAnswer: false,
+      date: new Date('2019-12-13T00:00:00')
+    })
+    makeSut(survey)
+    expect(screen.getByTestId('icon')).toHaveProperty('src', IconName.thumbDown)
+    expect(screen.getByTestId('question')).toHaveTextContent(survey.question)
+    expect(screen.getByTestId('day')).toHaveTextContent('13')
+    expect(screen.getByTestId('month')).toHaveTextContent('dez')
+    expect(screen.getByTestId('year')).toHaveTextContent('2019')
+  })
 })
