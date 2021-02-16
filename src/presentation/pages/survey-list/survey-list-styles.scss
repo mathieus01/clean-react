@@ -29,124 +29,6 @@
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: space-between;
-
-      li {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        flex-basis: 48%;
-        border-radius: 8px;
-        height: 250px;
-        background-color: $white;
-        margin-bottom: 24px;
-        box-shadow: 0px 12px 14px -16px $primaryDark;
-
-        &:empty {
-          position: relative;
-          overflow: hidden;
-          background-repeat: no-repeat;
-          background-image: 
-            linear-gradient(to right, $disabledBackground, $disabledBackground),
-            linear-gradient(to right, $disabledBackground, $disabledBackground),
-            linear-gradient(to right, $disabledBackground, $disabledBackground),
-            linear-gradient(to right, $disabledBackground, $disabledBackground),
-            linear-gradient(to right, $disabledBackground, $disabledBackground);
-          background-position: 
-            24px 55px,
-            left 0 bottom 0,
-            108px 77px,
-            108px 97px,
-            108px 117px;
-          background-size: 
-            60px 100px,
-            100% 40px,
-            155px 16px,
-            140px 16px,
-            170px 16px;
-
-          &::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background-image: linear-gradient(to right, transparent, rgba($white, 0.3), transparent);
-            transform: translateX(-100%);
-            animation: shimmer 1.3s infinite;
-          }
-        }
-
-        .surveyContent {
-          display: flex;
-          flex-direction: row;
-          border-radius: 8px 8px 0px 0px;
-          justify-content: space-between;
-          flex-grow: 1;
-          background-repeat: no-repeat;
-          background-image: 
-            linear-gradient(to right, rgba($primaryLight, 0.3), rgba($primaryLight, 0.3)),
-            linear-gradient(to right, rgba($white, 0.1),rgba($white, 0.1));
-          background-position: 0 0, 54 0;
-          background-size: 54px 100%, 100% 100%;
-          position: relative;
-          
-          .iconWrap {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-          }
-
-          time {
-            display: flex;
-            flex-direction: column;
-            background-color: $primaryLight;
-            color: $white;
-            border-radius: 8px;
-            margin-left: 24px;
-            align-self: center;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 100px;
-            flex-shrink: 0;
-
-            .day {
-              font-size: 40px;
-              font-weight: bold;
-            }
-            .month {
-              text-transform: lowercase;
-              margin: 0px 0px 5px;
-            }
-            .year {
-              font-size: 16px;
-            }
-          }
-
-          p {
-            font-size: 18px;
-            margin: 24px;
-            align-self: center;
-            flex-grow: 1;
-          }
-        }
-        
-        footer {
-          background-color: $primary;
-          color: $white;
-          line-height: 40px;
-          text-transform: lowercase;
-          text-align: center;
-          cursor: pointer;
-          border-radius: 0px 0px 8px 8px;
-
-          &:hover{
-            background-color: $primaryDark;
-          }
-        }
-      }
-    }
   }
 }
 
@@ -159,17 +41,8 @@
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: space-between;
-  
-        li {
-          flex-basis: 100%;
-        }
       }
     }
   } 
 }
-
-@keyframes shimmer {
-  100% {
-    transform: translateX(100%);
-  }
 }
