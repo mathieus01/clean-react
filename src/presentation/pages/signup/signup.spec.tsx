@@ -7,11 +7,11 @@ import { render, fireEvent, waitFor, screen } from '@testing-library/react'
 import faker from 'faker'
 import { EmailInUseError } from '@/domain/errors'
 import { createMemoryHistory } from 'history'
-import { AccountModel } from '@/domain/models'
+import { AddAccount } from '@/domain/usecases'
 
 type SutTypes = {
   addAccountSpy: AddAccountSpy
-  setCurrentAccountMock: (account: AccountModel) => void
+  setCurrentAccountMock: (account: AddAccount.Model) => void
 }
 
 type SutParams = {
