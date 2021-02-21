@@ -99,8 +99,8 @@ describe('Login', () => {
         accessToken: faker.random.uuid()
       }
     })
-    cy.getByTestId('email').type('mango@gmail.com')
-    cy.getByTestId('password').type('12345')
+    cy.getByTestId('email').type(faker.internet.email())
+    cy.getByTestId('password').type(faker.random.alphaNumeric(6))
     cy.getByTestId('submit').click()
     cy.getByTestId('spinner').should('not.exist')
     cy.url().should('eq', `${baseUrl}/`)
