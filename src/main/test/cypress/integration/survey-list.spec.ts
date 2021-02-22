@@ -1,0 +1,16 @@
+import faker from 'faker'
+import * as FormHelper from '../support/form-helpers'
+import * as Helper from '../support/helpers'
+import * as Http from '../support/survey-list-mocks'
+
+describe('SurveyList', () => {
+  beforeEach(() => {
+    Helper.testSetLocalStorageItem('account', { accessToken: faker.random.uuid(), name: faker.name.findName() })
+  })
+
+  it('Should present error on UnexpectedError', () => {
+    Http.mockServerError()
+    cy.visit('')
+    cy.getByTestId('error').should('contain.text', 'Algo de errado aconteceu. Tente novamente em breve')
+  })
+})
