@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import Styles from './signup-styles.scss'
-import { Header, Footer, Input, FormStatus, SubmitButton } from '@/presentation/components'
-import Context from '@/presentation/contexts/form/form-context'
+import { LoginHeader, Footer, Input, FormStatus, SubmitButton } from '@/presentation/components'
+import { FormContext, ApiContext } from '@/presentation/contexts'
 import { Validation } from '@/presentation/protocols/validation'
-import { AddAccount, SaveAccessToken } from '@/domain/usecases'
+import { AddAccount } from '@/domain/usecases'
 
 type Props = {
   validation: Validation
   addAccount: AddAccount
-  saveAccessToken: SaveAccessToken
 }
 
-const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Props) => {
+const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
+  const { setCurrentAccount } = useContext(ApiContext)
   const history = useHistory()
   const [state, setState] = useState({
     isLoading: false,
@@ -57,7 +57,7 @@ const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Pr
         password: state.password,
         passwordConfirmation: state.passwordConfirmation
       })
-      await saveAccessToken.save(account.accessToken)
+      setCurrentAccount(account)
       history.replace('/')
     } catch (error) {
       setState({ ...state, isLoading: false, mainError: error.message })
@@ -65,9 +65,9 @@ const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Pr
   }
 
   return (
-    <div className={Styles.signup}>
-      <Header />
-      <Context.Provider value={ { state, setState }}>
+    <div className={Styles.signupWrap}>
+      <LoginHeader />
+      <FormContext.Provider value={ { state, setState }}>
         <form data-testid='form' className={Styles.form} onSubmit={handleSubmit}>
           <h2>Criar Conta</h2>
           <Input type="text" name="name" placeholder="Digite seu nome"/>
@@ -78,7 +78,7 @@ const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Pr
           <Link replace to="/login" data-testid="login-link" className={Styles.link}>Voltar para Login</Link>
           <FormStatus />
         </form>
-      </Context.Provider>
+      </FormContext.Provider>
       <Footer />
     </div>
   )

@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import Styles from './login-styles.scss'
-import { Header, Footer, Input, FormStatus, SubmitButton } from '@/presentation/components'
-import Context from '@/presentation/contexts/form/form-context'
+import { LoginHeader, Footer, Input, FormStatus, SubmitButton } from '@/presentation/components'
+import { FormContext, ApiContext } from '@/presentation/contexts'
 import { Validation } from '@/presentation/protocols/validation'
-import { Authentication, SaveAccessToken } from '@/domain/usecases'
+import { Authentication } from '@/domain/usecases'
 
 type Props = {
   validation: Validation
   authentication: Authentication
-  saveAccessToken: SaveAccessToken
 }
 
-const Login: React.FC<Props> = ({ validation, authentication, saveAccessToken }: Props) => {
+const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
+  const { setCurrentAccount } = useContext(ApiContext)
   const history = useHistory()
   const [state, setState] = useState({
     isLoading: false,
@@ -44,7 +44,7 @@ const Login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
       }
       setState({ ...state, isLoading: true })
       const account = await authentication.auth({ email: state.email, password: state.password })
-      await saveAccessToken.save(account.accessToken)
+      setCurrentAccount(account)
       history.replace('/')
     } catch (error) {
       setState({ ...state, isLoading: false, mainError: error.message })
@@ -52,9 +52,9 @@ const Login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
   }
 
   return (
-    <div className={Styles.login}>
-      <Header />
-      <Context.Provider value={ { state, setState }}>
+    <div className={Styles.loginWrap}>
+      <LoginHeader />
+      <FormContext.Provider value={ { state, setState }}>
         <form data-testid='form' className={Styles.form} onSubmit={handleSubmit}>
           <h2>Login</h2>
           <Input type="email" name="email" placeholder="digite seu e-mail"/>
@@ -63,7 +63,7 @@ const Login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
           <Link data-testid="signup-link" to='/signup' className={Styles.link}>Criar Conta</Link>
           <FormStatus />
         </form>
-      </Context.Provider>
+      </FormContext.Provider>
       <Footer />
     </div>
   )
