@@ -7,11 +7,10 @@ export namespace LoadSurveyResult {
     id: string
     question: string
     date: Date
-    answers: LoadSurveyResultAnswer.Model[]
+    answers: LoadSurveyResultAnswer[]
   }
-}
-export namespace LoadSurveyResultAnswer {
-  export type Model = {
+
+  type LoadSurveyResultAnswer = {
     image?: string
     answer: string
     count: number

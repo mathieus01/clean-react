@@ -5,16 +5,32 @@ import { LoadSurveyResult } from '@/domain/usecases'
 export class RemoteLoadSurveyResult implements LoadSurveyResult {
   constructor (
     private readonly url: string,
-    private readonly httpGetClient: HttpGetClient
+    private readonly httpGetClient: HttpGetClient<RemoteLoadSurveyResult.Model>
   ) {}
 
   async load (): Promise<LoadSurveyResult.Model> {
     const httpResponse = await this.httpGetClient.get({ url: this.url })
+    const remoteSurveyResult = httpResponse.body
     switch (httpResponse.statusCode) {
-      case HttpStatusCode.ok: break
+      case HttpStatusCode.ok: return Object.assign({}, remoteSurveyResult, { date: new Date(remoteSurveyResult.date) })
       case HttpStatusCode.forbidden: throw new AccessDeniedError()
       default: throw new UnexpectedError()
     }
-    return Promise.resolve(null)
+  }
+}
+
+export namespace RemoteLoadSurveyResult{
+  export type Model = {
+    id: string
+    question: string
+    date: string
+    answers: LoadSurveyResultAnswer[]
+  }
+
+  type LoadSurveyResultAnswer = {
+    image?: string
+    answer: string
+    count: number
+    percent: number
   }
 }
