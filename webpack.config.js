@@ -6,9 +6,9 @@ module.exports = {
   mode: 'development',
   entry: './src/main/index.tsx',
   output: {
-    path: path.join(__dirname, 'public/js'),
-    publicPath: '/public/js',
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'disc'),
+    publicPath: '/',
+    filename: 'main-bundle.js'
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', 'scss'],
