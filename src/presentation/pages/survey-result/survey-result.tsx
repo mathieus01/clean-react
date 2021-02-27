@@ -46,7 +46,7 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }: Props) => {
                 <li data-testid="answer-wrap" key={answer.answer} className={answer.isCurrentAccountAnswer ? Styles.active : ''}>
                   {answer.image && <img data-testid="image" src={answer.image} alt={answer.answer} />}
                   <span data-testid="answer" className={Styles.answer}>{answer.answer}</span>
-                  <span data-testid="percent" className={Styles.percent}>${answer.percent}%</span>
+                  <span data-testid="percent" className={Styles.percent}>{answer.percent}%</span>
                 </li>
               )}
             </FlipMove>
