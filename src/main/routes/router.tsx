@@ -4,7 +4,6 @@ import { ApiContext } from '@/presentation/contexts'
 import { BrowserRouter, Switch, Route } from 'react-Router-dom'
 import { setCurrentAccountAdapter, getCurrentAccountAdapter } from '../adapters/current-account-adapter'
 import { PrivateRoute } from '@/presentation/components'
-import { SurveyResult } from '@/presentation/pages'
 
 const Router: React.FC = () => {
   return (
