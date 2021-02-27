@@ -10,7 +10,7 @@
   height: 250px;
   background-color: $white;
   margin-bottom: 24px;
-  box-shadow: 0px 12px 14px -16px $primaryDark;
+  box-shadow: rgba( $primaryDark, 0.24) 0px 3px 8px;
 
   position: relative;
     overflow: hidden;
